@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require 'socket'
+
+port_file = "/virtual/.last_port"
+
+begin
+    current_port = File.open(port_file, "rb").read.to_i
+rescue Errno::ENOENT
+    $stderr.puts "Creating #{ port_file }\n"
+    current_port = 3000
+end
+
+new_port = current_port + 1
+
+File.open(port_file, 'w') {|f| f.write(new_port) }
+  
+
+begin
+  server = TCPServer.new new_port
+rescue Errno::EADDRINUSE
+  $stderr.puts "Port #{ new_port } is already in use. Trying again..."
+  exec __FILE__
+end
+
+$stdout.puts(new_port.to_s)

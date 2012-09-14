@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+require 'ipaddr'
+
+ip_file = "/virtual/.last_ip"
+
+begin
+    current_ip = IPAddr.new File.open(ip_file, "rb").read
+rescue Errno::ENOENT
+    $stderr.puts "Creating #{ ip_file }\n"
+    current_ip = IPAddr.new "192.168.0.1"
+end
+
+new_ip = current_ip.succ
+
+File.open(ip_file, 'w') {|f| f.write(new_ip) }
+
+$stderr.puts `ping -c 1 #{ new_ip }`
+
+$stdout.puts(new_ip.to_s)

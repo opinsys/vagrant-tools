@@ -1,3 +1,5 @@
+# Set Vagrant auto port range to users. 
+# This fix port collision problem. See more: https://github.com/mitchellh/vagrant/issues/272
 
 port_range_by_user = {
   "jokor" => {

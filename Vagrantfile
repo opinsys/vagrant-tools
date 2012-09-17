@@ -38,7 +38,7 @@ Vagrant::Config.run do |config|
   user = ENV["USER"]
 
   unless port_range_by_user.has_key?(user)
-    puts "User (#{user}) Vagrant port configuration not found! Edit '/etc/Vagrantfile' file!"
+    puts "User (#{user}) Vagrant port configuration not found! Edit '/virtual/vagrant-tools/Vagrantfile' file!"
     exit 1
   end
 

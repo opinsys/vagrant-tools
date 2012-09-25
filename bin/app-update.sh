@@ -31,9 +31,17 @@ fi
 
 git merge $BRANCH
 [ -f Makefile ] && make
-git tag -a "update-$(date +%Y-%m-%d_%H-%M)" -m "Production update from $BRANCH on $(date)"
-sudo restart $APP
 
+
+echo
+sudo restart $APP
+echo
+
+echo
+TAG_NAME="update-$(date +%Y-%m-%d_%H-%M)"
+echo "Creating tag $TAG_NAME"
+git tag -a $TAG_NAME -m "Production update from $BRANCH on $(date)"
+echo
 
 echo "Upstart log: sudo tail -f /var/log/upstart/$APP.log"
 echo "If ok push changes and tags"

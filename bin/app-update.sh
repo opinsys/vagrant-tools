@@ -12,19 +12,20 @@ fi
 
 APP=$(basename $(pwd))
 
+echo "Fetching changes..."
 git fetch origin
 
 git branch -r
 
-read -p "Branch?> " BRANCH
+read -p "Merge from branch?> " BRANCH
 
 [ -z "$BRANCH" ] && exit 1
 
 git diff master..$BRANCH
 
-builtin read -p "Merge above and update? (y/n)> " MERGE
+builtin read -p "Merge above and update? (y/N)> " MERGE
 if [ "$MERGE" != "y" ]; then
-    echo "Merge canceled"
+    echo "Update canceled"
     exit 1
 fi
 

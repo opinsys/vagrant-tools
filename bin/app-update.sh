@@ -43,10 +43,11 @@ echo "Creating tag $TAG_NAME"
 git tag -a $TAG_NAME -m "Production update from $BRANCH on $(date)"
 echo
 
-echo "Upstart log: sudo tail -f /var/log/upstart/$APP.log"
-echo "If ok push changes and tags"
-echo "git push origin master:master"
-echo "git push --tags origin"
+git push origin master:master
+git push --tags origin
+
+sudo tail -f /var/log/upstart/$APP.log
+
 
 
 

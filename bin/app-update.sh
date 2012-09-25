@@ -1,4 +1,5 @@
 #!/bin/bash -e
+# cd /var/app/sovellus/
 # wget https://github.com/opinsys/vagrant-tools/raw/master/bin/app-update.sh -O app-update.sh && bash -e app-update.sh
 
 

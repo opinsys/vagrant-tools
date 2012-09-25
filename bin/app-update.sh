@@ -29,6 +29,16 @@ if [ "$MERGE" != "y" ]; then
 fi
 
 git merge $BRANCH
+git tag -a "update-$(date +%Y-%m-%d_%H-%M)" -m "Production update from $BRANCH on $(date)"
 make
 sudo restart $APP
-sudo tail -f /var/log/upstart/$APP.log ; echo && echo "Push master if ok: git push origin master:master"
+
+
+echo "Upstart log: sudo tail -f /var/log/upstart/$APP.log"
+echo "If ok push changes and tags"
+echo "git push origin master:master"
+echo "git push --tags origin"
+
+
+
+

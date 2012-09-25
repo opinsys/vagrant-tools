@@ -29,8 +29,8 @@ if [ "$MERGE" != "y" ]; then
 fi
 
 git merge $BRANCH
+[ -f Makefile ] && make
 git tag -a "update-$(date +%Y-%m-%d_%H-%M)" -m "Production update from $BRANCH on $(date)"
-make
 sudo restart $APP
 
 

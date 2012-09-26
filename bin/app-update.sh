@@ -3,8 +3,6 @@
 # wget https://github.com/opinsys/vagrant-tools/raw/master/bin/app-update.sh -O app-update.sh && bash -e app-update.sh
 
 
-cd $(git rev-parse --show-toplevel)
-
 if [[ ! $(cat .git/HEAD) =~ "ref: refs/heads/master"  ]]; then
     echo "You are not on the master branch?"
     exit 1

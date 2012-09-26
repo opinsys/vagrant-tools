@@ -21,32 +21,29 @@ read -p "Merge from branch?> " BRANCH
 
 git diff master..$BRANCH
 
-builtin read -p "Merge above and update? (y/N)> " MERGE
+echo
+read -p "Merge above and update? (y/N)> " MERGE
 if [ "$MERGE" != "y" ]; then
-    echo "Update canceled"
+    echo "Merge&Update canceled"
     exit 1
 fi
 
 git merge $BRANCH
+
 [ -f Makefile ] && make
 
-
 echo
+echo "Restarting $APP with Upstart..."
 sudo restart $APP
+
+
 echo
-
-echo
-TAG_NAME="update-$(date +%Y-%m-%d_%H-%M)"
-echo "Creating tag $TAG_NAME"
-git tag -a $TAG_NAME -m "Production update from $BRANCH on $(date)"
-echo
-
-git push origin master:master
-git push --tags origin
-
-sudo tail -f /var/log/upstart/$APP.log
-
-
-
-
-
+read -p "Tag update and push it to origin/master? (y/N)> " PUSH
+if [ "$PUSH" == "y" ]; then
+    echo
+    TAG_NAME="update-$(date +%Y-%m-%d_%H-%M)"
+    echo "Creating tag $TAG_NAME"
+    git tag -a $TAG_NAME -m "Production update from $BRANCH on $(date)"
+    git push origin master:master
+    git push --tags origin
+fi

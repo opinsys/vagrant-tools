@@ -29,9 +29,9 @@ port_range_by_user = {
    "hannele" => {
      :forward_port => 14400,
      :port_range => 14401..14449 },
-  # "xxxxxx" => {
-  #   :forward_port => 14450,
-  #   :port_range => 14451..14499 },
+   "janne.saarela" => {
+     :forward_port => 14450,
+     :port_range => 14451..14499 },
 }
 
 Vagrant::Config.run do |config|
